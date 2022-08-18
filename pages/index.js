@@ -32,15 +32,14 @@ export default function Home() {
         <link rel="manifest" href="../site.webmanifest" />
       </Head>
 
-      <main
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: '100vw',
-          height: '100vh',
-        }}
+      <Flex
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        padding={[2, 0]}
+        width="100vw"
+        height={['80vh', '100vh']}
+        textAlign="center"
       >
         <Text fontSize={32} fontWeight={900} color="#000201" mb={8}>
           Lucas Azevedo - Web and Mobile developer
@@ -53,7 +52,7 @@ export default function Home() {
             You can get in touch by accessing my LinkedIn profile
           </Text>
         </Link>
-      </main>
+      </Flex>
     </>
   )
 }
