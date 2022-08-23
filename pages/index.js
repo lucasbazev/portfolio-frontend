@@ -36,19 +36,19 @@ export default function Home() {
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        padding={[2, 0]}
-        width="100vw"
-        height={['80vh', '100vh']}
+        padding={2}
+        width="100%"
+        height="100%"
         textAlign="center"
       >
-        <Text fontSize={32} fontWeight={900} color="#000201" mb={8}>
+        <Text fontSize={32} fontWeight={900} mb={8}>
           Lucas Azevedo - Web and Mobile developer
         </Text>
 
         <Text>This website is under construction... 🚧</Text>
 
         <Link href="https://linkedin.com/in/lucasbazev">
-          <Text cursor="pointer" _hover={{ color: '#2A88FF', fontWeight: 600 }}>
+          <Text cursor="pointer" _hover={{ color: 'primary', fontWeight: 600 }}>
             You can get in touch by accessing my LinkedIn profile
           </Text>
         </Link>
