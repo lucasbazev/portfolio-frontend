@@ -1,16 +1,14 @@
 import React from 'react'
-import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { Box, Flex, Text, useColorMode } from '@chakra-ui/react'
-import { SunIcon } from '@chakra-ui/icons'
+import { SunIcon, MoonIcon } from '@chakra-ui/icons'
 
 import { Logo } from 'components/atoms'
 import { menuLinks } from './settings'
 
-export const Menu = () => {
-  const { route } = useRouter()
+export const Menu = (props) => {
   const { colorMode, toggleColorMode } = useColorMode()
-  console.log(route)
+  const { route } = props
 
   return (
     <Box padding={4} width={300} height="100%" position="relative">
@@ -45,7 +43,8 @@ export const Menu = () => {
         cursor="pointer"
         onClick={toggleColorMode}
       >
-        <SunIcon mr={2} />
+        {colorMode === 'light' ? <MoonIcon mr={2} /> : <SunIcon mr={2} />}
+
         <Text fontSize={14} fontWeight={500}>
           Switch to {colorMode === 'light' ? 'dark' : 'ligth'}
         </Text>

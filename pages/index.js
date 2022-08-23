@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import { Flex, Text } from '@chakra-ui/react'
 
 export default function Home() {
@@ -44,14 +43,6 @@ export default function Home() {
         <Text fontSize={32} fontWeight={900} mb={8}>
           Lucas Azevedo - Web and Mobile developer
         </Text>
-
-        <Text>This website is under construction... 🚧</Text>
-
-        <Link href="https://linkedin.com/in/lucasbazev">
-          <Text cursor="pointer" _hover={{ color: 'primary', fontWeight: 600 }}>
-            You can get in touch by accessing my LinkedIn profile
-          </Text>
-        </Link>
       </Flex>
     </>
   )
