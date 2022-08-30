@@ -32,7 +32,7 @@ export default function Home() {
           </span>
         </Text>
 
-        <Text fontSize={18}>I'm also an admirer of coffee, tech and cars.</Text>
+        <Text fontSize={18}>I am also an admirer of coffee, tech and cars.</Text>
       </Box>
     </Flex>
   )
