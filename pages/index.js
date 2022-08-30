@@ -1,49 +1,39 @@
-import Head from 'next/head'
-import { Flex, Text } from '@chakra-ui/react'
+import { Avatar, Flex, Box, Text, useTheme } from '@chakra-ui/react'
 
 export default function Home() {
-  return (
-    <>
-      <Head>
-        <title>Lucas Azevedo</title>
-        <meta
-          name="description"
-          content="Lucas Azevedo's personal website/portfolio - Web and Mobile Developer"
-        />
-        <link rel="icon" href="/favicons/favicon.ico" />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/favicons/apple-touch-icon.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicons/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicons/favicon-16x16.png"
-        />
-        <link rel="manifest" href="../site.webmanifest" />
-      </Head>
+  const theme = useTheme()
 
-      <Flex
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        padding={2}
-        width="100%"
-        height="100%"
-        textAlign="center"
-      >
-        <Text fontSize={32} fontWeight={900} mb={8}>
-          Lucas Azevedo - Web and Mobile developer
+  return (
+    <Flex flexDirection="column" px={2} pt={32} width="100%" height="100%">
+      <Flex alignItems="center" mb={8}>
+        <Avatar
+          showBorder
+          borderWidth={3}
+          borderColor="primary"
+          size="lg"
+          name="Lucas Azevedo"
+          src="/img/avatarImg.jpeg"
+        />
+        <Text color="primary" fontSize={28} fontWeight={900} ml={4}>
+          Lucas Azevedo
         </Text>
       </Flex>
-    </>
+
+      <Box width="75%">
+        <Text fontSize={18} mb={6}>
+          Software developer based in Brasília, passionate about software
+          development.{' '}
+        </Text>
+
+        <Text fontSize={18} mb={6}>
+          Currently working as Web and Mobile Developer at SevenApps -{' '}
+          <span style={{ color: theme.colors.primary, display: 'block' }}>
+            mostly using React, Next.js and React Native.
+          </span>
+        </Text>
+
+        <Text fontSize={18}>I'm also an admirer of coffee, tech and cars.</Text>
+      </Box>
+    </Flex>
   )
 }
