@@ -16,9 +16,7 @@ export const ProvisionalPage = (props) => {
     >
       <Text mb={2}>This page is under construction... 🚧</Text>
 
-      <Link
-        href={route === '/contact' ? 'https://linkedin.com/in/lucasbazev' : '/'}
-      >
+      <Link href={route === '/contact' ? '/linkedin' : '/'}>
         <Flex
           alignItems="center"
           cursor="pointer"
