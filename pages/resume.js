@@ -1,6 +1,8 @@
-import { Box, Text } from '@chakra-ui/react'
+import { Box, Text, Flex } from '@chakra-ui/react'
 import { ResumeItemCard } from 'components/molecules'
 import { env } from 'next.config'
+import { useState } from 'react'
+import { formatDate, formatExperienceText, formatTypeName } from 'utils/format'
 
 export async function getServerSideProps() {
   const apiData = await fetch('http://localhost:3001/resume')
@@ -14,50 +16,97 @@ export async function getServerSideProps() {
 }
 
 const ResumePage = ({ data }) => {
-  console.log({ data })
+  const [selectedOption, setSelectedOption] = useState({
+    item: data?.contracts_freelancing?.[0],
+    type: 'contracts_freelancing',
+  })
 
-  const formatTypeName = (type) => {
-    switch (type) {
-      case 'full_time':
-        return 'Full-time'
-
-      case 'contracts_freelancing':
-        return 'Contracts | Freelance work'
-
-      case 'mentorship':
-        return 'Mentorship'
-    }
-  }
+  console.log({ selectedOption, data })
 
   return (
-    <Box>
-      {!!data ? (
-        Object.keys(data).map((type) => (
-          <Box my={8} key={type}>
-            <Text fontSize={24} fontWeight={700} my={2}>
-              {formatTypeName(type)}
-            </Text>
-
-            {type !== 'mentorship' ? (
-              data[type].map((item) => (
-                <ResumeItemCard
-                  key={`experience_${item?.position}`}
-                  item={item}
-                  px={4}
-                  my={4}
-                />
+    <Flex align="center" justify="center" width="100%" height="100%">
+      <Flex align="center" width="100%" gap={8}>
+        <Box width="40%">
+          {Object.keys(data).map((type) =>
+            type !== 'mentorship' ? (
+              data[type]?.map((item) => (
+                <Box
+                  key={item?.id}
+                  padding={4}
+                  width="100%"
+                  bgColor={
+                    item.id === selectedOption?.item?.id
+                      ? 'primaryLight'
+                      : 'transparent'
+                  }
+                  borderRadius={8}
+                  transition="0.5s"
+                  cursor="pointer"
+                  onClick={() => setSelectedOption({ item, type })}
+                >
+                  <Text fontSize={16} fontWeight={700}>
+                    {item.company}
+                  </Text>
+                  <Text fontSize={14} color="lightText">
+                    {item.position}
+                  </Text>
+                </Box>
               ))
             ) : (
-              <Text px={4} maxW={[320, 640, 960]}>
-                {data[type]}
+              <Box
+                key={type}
+                padding={4}
+                width="100%"
+                bgColor={
+                  selectedOption?.item === 'mentorship'
+                    ? 'primaryLight'
+                    : 'transparent'
+                }
+                borderRadius={8}
+                transition="0.5s"
+                cursor="pointer"
+                onClick={() =>
+                  setSelectedOption({ item: 'mentorship', type: 'mentorship' })
+                }
+              >
+                <Text fontSize={16} fontWeight={700}>
+                  Mentorship
+                </Text>
+              </Box>
+            )
+          )}
+        </Box>
+
+        <Box width="40%">
+          <Box mb={4}>
+            {selectedOption?.item === 'mentorship' ? (
+              <Text color="primary" fontWeight={600}>
+                Mentorship
               </Text>
+            ) : (
+              <>
+                <Text color="primary" fontWeight={600}>
+                  {`${selectedOption?.item?.position} at ${selectedOption?.item?.company}`}
+                </Text>
+
+                <Text color="lightText" fontSize={14}>
+                  {formatExperienceText(selectedOption?.item)}
+                </Text>
+
+                <Text color="black" fontSize={14} fontWeight={600}>
+                  {formatTypeName(selectedOption?.type)}
+                </Text>
+              </>
             )}
           </Box>
-        ))
-      ) : (
-        <Text p={12}>Sorry... we couldnt get the data</Text>
-      )}
-    </Box>
+
+          <Text>
+            {selectedOption?.item?.job_description ||
+              data[selectedOption?.item]}
+          </Text>
+        </Box>
+      </Flex>
+    </Flex>
   )
 }
 
